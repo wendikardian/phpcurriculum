@@ -26,10 +26,29 @@ echo "In a day, we have {$secondInADay} seconds of life";
 echo "<br>";
 echo "And we use {$divisioOfThree} seconds of life for sleeping";
 
+// Modulus
+
 echo "<br>";
 echo "<br>";
 echo "<br>";
 
 $restOfDiv = 365 % 12;
 echo "We have {$restOfDiv} as rest after divide 365 by 12";
+
+
+$number = 3;
+$squareOfNumber = $number ** 2;
+echo "<br>";
+echo "<br>";
+echo "<br>";
+echo "Square of {$number} is {$squareOfNumber}";
+
+echo "<br>";
+echo "<br>";
+echo "<br>";
+
+$greet = "Good";
+$greet .= " Morning all !";
+
+echo $greet;
 ?>
