@@ -42,26 +42,63 @@ $quotes = array(
         'quote' =>  'If life were predictable it would cease to be life, and be without flavor.'
     ),
 
+
 );
 
-$random_indexes = rand(0, count($quotes) - 1);
-$random_quotes = $quotes[$random_indexes];
+if (isset($_GET['author']) && isset($_GET['quote'])) {
+    $author = $_GET['author'];
+    $quote = $_GET['quote'];
+    if (isset($_GET['my_quote'])) {
+        $new_quote = array(
+            'author' => $author,
+            'quote' => $quote
+        );
+        $totalLength = array_push($quotes, $new_quote);
+        $random_quotes = $quotes[$totalLength - 1];
+    } else {
+        $random_indexes = rand(0, count($quotes) - 1);
+        $random_quotes = $quotes[$random_indexes];
+    }
+} else {
+    $random_indexes = rand(0, count($quotes) - 1);
+    $random_quotes = $quotes[$random_indexes];
+}
 $author_quotes = $random_quotes['author'];
 $quotes_sentences = $random_quotes['quote'];
+
 
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quotes Generator - Array Assosiative</title>
 </head>
+
 <body>
     <h1>Quote of the day !</h1>
     <p>Press f5 or ctrl + R to randomize the quote</p>
     <h4><?= $quotes_sentences;  ?> - <?= $author_quotes; ?> </h4>
+
+    <h3>Add a new quotes</h3>
+    <form action="">
+        <label for="author">Author name</label>
+        <input type="text" name="author" required>
+        <br>
+        <label for="quote">Inspirational Quote</label>
+        <input type="text" name="quote" required>
+        <br>
+        <label>Show my input quote </label>
+        <input type="checkbox" name="my_quote">
+        <br>
+        <input type="submit">
+
+
+    </form>
 </body>
+
 </html>
