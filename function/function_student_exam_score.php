@@ -1,5 +1,8 @@
 <?php
 
+// This is already implemented function parameters type hinting
+
+
 $exam_score = [
     array(
         'id' => 1220,
