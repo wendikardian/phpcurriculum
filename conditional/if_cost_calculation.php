@@ -8,11 +8,15 @@
         $kambojaLength = 0;
         $lotusLength = 0;
     }
+
     // $angrekLength = $_GET["anggrek"];
     // $kambojaLength = $_GET["kamboja"];
     // $lotusLength = $_GET["lotus"];
     // error_reporting(error_reporting() & ~E_NOTICE);
+
     $isCashReady= false;
+
+
     $jlnAnggrek = $angrekLength * 1000;
     $jlnKamboja = $kambojaLength;
     $jlnLotus = $lotusLength / 100;

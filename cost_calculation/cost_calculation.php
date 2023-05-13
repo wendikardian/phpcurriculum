@@ -6,8 +6,8 @@
     $cost = 15000;
 
     $totalLength = $jlnAnggrek + $jlnKamboja + $jlnLotus;
-    $feeForEmployee = $totalLength * $feePerMeter;
     $costTotal = $totalLength * $cost;
+    $feeForEmployee = $totalLength * $feePerMeter;
     $totalCostIncludeFee = $feeForEmployee + $costTotal;
 
 ?>

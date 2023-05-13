@@ -10,7 +10,7 @@ if (isset($_GET["anggrek"]) && isset($_GET["kamboja"]) && isset($_GET["lotus"]))
     }
     // var_dump($isCashReady);
     $distance_unit = $_GET["distance_unit"];
-    switch($distance_unit){
+    switch ($distance_unit) {
         case "CM":
             $angrekLength = $angrekLength / 100000;
             $kambojaLength = $kambojaLength / 100;
@@ -67,19 +67,19 @@ $totalCostIncludeFee = $feeForEmployee + $costTotal;
     <form action="">
         <label for="distance-unit">Distance Unit:</label>
         <select id="distance-unit" name="distance_unit">
-            <option value="CM" <?php if(isset($_GET['distance_unit']) && $_GET['distance_unit'] == 'CM') echo 'selected'; ?>>Centimeters (CM)</option>
-            <option value="M" <?php if(isset($_GET['distance_unit']) && $_GET['distance_unit'] == 'M') echo 'selected'; ?>>Meters (M)</option>
-            <option value="KM" <?php if(isset($_GET['distance_unit']) && $_GET['distance_unit'] == 'KM') echo 'selected'; ?>>Kilometers (KM)</option>
+            <option value="CM" <?php if (isset($_GET['distance_unit']) && $_GET['distance_unit'] == 'CM') echo 'selected'; ?>>Centimeters (CM)</option>
+            <option value="M" <?php if (isset($_GET['distance_unit']) && $_GET['distance_unit'] == 'M') echo 'selected'; ?>>Meters (M)</option>
+            <option value="KM" <?php if (isset($_GET['distance_unit']) && $_GET['distance_unit'] == 'KM') echo 'selected'; ?>>Kilometers (KM)</option>
         </select>
         <br>
         <label for="anggrek">Anggrek Street (Kilometer)</label>
         <input type="number" step="0.01" name="anggrek" value="<?php echo isset($_GET['anggrek']) ? htmlspecialchars($_GET['anggrek']) : '' ?>" required>
         <br>
         <label for="kamboja">Kamboja Street (meter)</label>
-        <input type="number" name="kamboja"  value="<?php echo isset($_GET['kamboja']) ? htmlspecialchars($_GET['kamboja']) : '' ?>" step="0.01" required>
+        <input type="number" name="kamboja" value="<?php echo isset($_GET['kamboja']) ? htmlspecialchars($_GET['kamboja']) : '' ?>" step="0.01" required>
         <br>
         <label for="lotus">Lotus Street (centimeter)</label>
-        <input type="number" value="<?php echo isset($_GET['lotus']) ? htmlspecialchars($_GET['lotus']) : '' ?>"  name="lotus"  step="0.0001" required>
+        <input type="number" value="<?php echo isset($_GET['lotus']) ? htmlspecialchars($_GET['lotus']) : '' ?>" name="lotus" step="0.0001" required>
         <br>
         <label for="checkbox">is cash ready ? </label>
         <input type="checkbox" name="is_checked" value="1">

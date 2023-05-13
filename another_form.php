@@ -3,6 +3,7 @@
     $password = $_GET['password'];
     echo "Your username is {$username} and password is {$password}";
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
