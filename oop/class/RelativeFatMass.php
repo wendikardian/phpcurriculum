@@ -1,8 +1,24 @@
 <?php
 
-class RelativeFatMass {
-    public $score = 0.0;
-    public $category = '';
+require_once('MassIndex.php');
+
+class RelativeFatMass extends MassIndex {
+
+    private $height = 0;
+    private $waistSize = 0;
+    private $gender = '';
+
+    public function setHeight($height) {
+        $this->height = $height;
+    }
+
+    public function setWaistSize($waistSize) {
+        $this->waistSize = $waistSize;
+    }
+
+    public function setGender($gender) {
+        $this->gender = $gender;
+    }
 
     public function calculate($height, $waistSize, $gender) {
         if ($gender === 'm') {

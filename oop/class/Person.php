@@ -9,6 +9,12 @@ class Person
     public $height = 0.0;
     public $weight = 0.0;
     public $waistSize = 0.0;
+
+    public function __construct($name = '', $age = 0, $gender = 'm') {
+        $this->name = $name;
+        $this->age = $age;
+        $this->gender = $gender;
+    }
     public function bio($name, $age, $gender)
     {
         $this->name = $name;

@@ -10,7 +10,7 @@ require_once('./helper/get_input.php');
 
 
 
-$person = new Person();
+$person = new Person('Some one', 20, 'm');
 $bmi = new BodyMassIndex();
 $rfm = new RelativeFatMass();
 
@@ -90,8 +90,8 @@ $rfm->calculate($height, $waistSize, $gender);
         echo "Width: " . $person->weight . "<br>";
         echo "Waist size: " . $person->waistSize . "<br>";
         echo '<br>';
-        echo 'BMI Score: ' . $bmi->score . ' belongs to the category <b> ' . $bmi->determineCategory() . '</b><br>';
-        echo 'RFM Score: ' . $rfm->score . ' belongs to the category <b>' . $rfm->determineCategory($person->gender) . '</b><br>';
+        echo 'BMI Score: ' . $bmi->getScore() . ' belongs to the category <b> ' . $bmi->determineCategory() . '</b><br>';
+        echo 'RFM Score: ' . $rfm->getScore() . ' belongs to the category <b>' . $rfm->determineCategory($person->gender) . '</b><br>';
     }
     ?>
 

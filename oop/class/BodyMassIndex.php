@@ -1,10 +1,17 @@
 <?php
+require_once('MassIndex.php');
 
+class BodyMassIndex extends MassIndex {
+    private $height = 0;
+    private $weight = 0;
 
-class BodyMassIndex
-{
-    public $score = 0.0;
-    public $category = '';
+    public function setHeight($height) {
+        $this->height = $height;
+    }
+
+    public function setWeight($weight) {
+        $this->weight = $weight;
+    }
 
     public function calculate($height, $weight)
     {
