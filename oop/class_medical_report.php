@@ -1,69 +1,42 @@
 <?php
 
-class Person
-{
-    public $name = '';
-    public $age = 0;
-    public $gender = 'm';
-    public $height = 0.0;
-    public $weight = 0.0;
-    public $waistSize = 0.0;
-    public function bio($name, $age, $gender)
-    {
-        $this->name = $name;
-        $this->age = $age;
-        $this->gender = $gender;
-    }
-
-    public function bodyFact($height, $weight, $waistSize)
-    {
-        $this->height = $height;
-        $this->weight = $weight;
-        $this->waistSize = $waistSize;
-    }
-}
-
-class BodyMassIndex {
-    public $score = 0.0;
-    public $category = '';
-
-    public function calculate($height, $weight) {
-        $this->score = $weight / (($height/100) * ($height/100));
-    }
-
-    public function determineCategory() {
-        if ($this->score < 18.5) {
-            return 'Underweight';
-        } elseif ($this->score >= 18.5 && $this->score < 25) {
-            return 'Normal weight';
-        } elseif ($this->score >= 25 && $this->score < 30) {
-            return 'Overweight';
-        } else {
-            return 'Obese';
-        }
-    }
-}
+require_once('./class/Person.php');
+require_once('./class/BodyMassIndex.php');
+require_once('./class/RelativeFatMass.php');
+require_once('./helper/get_input.php');
 
 
 
 
-if (isset($_GET['name']) && isset($_GET['age']) && isset($_GET['gender']) && isset($_GET['height']) && isset($_GET['weight']) && isset($_GET['waistSize'])) {
-    $name = $_GET['name'];
-    $age = $_GET['age'];
-    $gender = $_GET['gender'];
-    $height = $_GET['height'];
-    $weight = $_GET['weight'];
-    $waistSize = $_GET['waistSize'];
-    $person = new Person();
-    $person->name = $name;
-    $person->age = $age;
-    $person->gender = $gender;
-    $person->height = $height;
-    $person->weight = $weight;
-    $person->waistSize = $waistSize;
-} else {
-    $person = new Person();
-}
+
+
+$person = new Person();
+$bmi = new BodyMassIndex();
+$rfm = new RelativeFatMass();
+
+
+
+
+
+$name = input_checker('name', '');
+$age = input_checker('age', 0);
+$gender = input_checker('gender', 'm');
+$height = input_checker('height', 1);
+$weight = input_checker('weight', 1);
+$waistSize = input_checker('waistSize', 1);
+
+// Assign nilai ke masing-masing properties objek person
+$person->name = $name;
+$person->age = $age;
+$person->gender = $gender;
+$person->height = $height;
+$person->weight = $weight;
+$person->waistSize = $waistSize;
+$bmi->calculate($height, $weight);
+$rfm->calculate($height, $waistSize, $gender);
+
+
+
 ?>
 
 
@@ -74,7 +47,7 @@ if (isset($_GET['name']) && isset($_GET['age']) && isset($_GET['gender']) && iss
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>BMI Calculator</title>
 </head>
 
 <body>
@@ -116,6 +89,9 @@ if (isset($_GET['name']) && isset($_GET['age']) && isset($_GET['gender']) && iss
         echo "Height: " . $person->height . "<br>";
         echo "Width: " . $person->weight . "<br>";
         echo "Waist size: " . $person->waistSize . "<br>";
+        echo '<br>';
+        echo 'BMI Score: ' . $bmi->score . ' belongs to the category <b> ' . $bmi->determineCategory() . '</b><br>';
+        echo 'RFM Score: ' . $rfm->score . ' belongs to the category <b>' . $rfm->determineCategory($person->gender) . '</b><br>';
     }
     ?>
 
