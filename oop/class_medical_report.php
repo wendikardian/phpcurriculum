@@ -25,7 +25,6 @@ $height = input_checker('height', 1);
 $weight = input_checker('weight', 1);
 $waistSize = input_checker('waistSize', 1);
 
-// Assign nilai ke masing-masing properties objek person
 $person->name = $name;
 $person->age = $age;
 $person->gender = $gender;
@@ -61,8 +60,8 @@ $rfm->calculate($height, $waistSize, $gender);
 
         <label for="gender">Select Gender:</label>
         <select id="gender" name="gender" required>
-            <option value="m">Laki-laki</option>
-            <option value="f">Perempuan</option>
+            <option value="m">Male</option>
+            <option value="f">Female</option>
         </select><br>
 
         <label for="height">Height (cm):</label>
