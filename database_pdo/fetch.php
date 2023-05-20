@@ -65,4 +65,13 @@ print_r($result);
 // print_r($products);
 
 
+
+// For delete data
+
+
+// $dataToDelete = 7;
+// $deleteQuery = "DELETE FROM products WHERE id = ?;";
+// $preparedQuery = $connection->prepare($deleteQuery);
+// $query = $preparedQuery->execute([$dataToDelete]);
+
 ?>
