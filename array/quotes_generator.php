@@ -44,8 +44,13 @@ $quotes = array(
 
 );
 
+// Digunakan untuk ngerandom angka dari index 0 sampai index terakhir array $quotes yang udah di buat
 $random_indexes = rand(0, count($quotes) - 1);
+
+// Ngambil elementnya
 $random_quotes = $quotes[$random_indexes];
+
+// Karena disini elementnya tuh indexed array berisi assoative array, di dalamnya harus akses key dari assosiative array
 $author_quotes = $random_quotes['author'];
 $quotes_sentences = $random_quotes['quote'];
 

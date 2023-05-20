@@ -53,7 +53,7 @@ function concate_full_name(string $first_name, string $last_name) : string {
     return $first_name . ' ' . $last_name;
 }
 
-function get_final_score_status(int $exam_score, int $quiz_score) : string{
+function get_final_score_status(int $exam_score = 0, int $quiz_score = 0) : string{
     if($exam_score > 80 and $quiz_score > 82){
         return "Passed!";
     }else if($exam_score > 80 and $quiz_score <= 82){
