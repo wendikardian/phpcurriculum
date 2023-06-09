@@ -5,11 +5,6 @@ require_once('./class/BodyMassIndex.php');
 require_once('./class/RelativeFatMass.php');
 require_once('./helper/get_input.php');
 
-
-
-
-
-
 $person = new Person('Some one', 20, 'm');
 $bmi = new BodyMassIndex();
 $rfm = new RelativeFatMass();
@@ -51,6 +46,7 @@ $rfm->calculate($height, $waistSize, $gender);
 
 <body>
     <h1>Data Input</h1>
+    
     <form action="" method="get">
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" required><br>
