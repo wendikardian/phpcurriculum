@@ -5,11 +5,11 @@ require_once('class/BodyMassIndex.php');
 require_once('class/RelativeFatMass.php');
 require_once('class/Person.php');
 require_once('connection.php');
+require_once('helper/database.php');
 
 $connection = $mysqlConnection->getConnection();
 
-$selectQuery = "SELECT * FROM persons";
-$query = $connection->query($selectQuery);
+$query = $connection->query($selectAllPersons);
 $users = $query->fetchAll();
 
 // print_r($users);

@@ -1,11 +1,8 @@
 <?php
 
-// require_once 'helper/get_input.php';
-// require_once 'class/Person.php';
-// require_once 'class/BodyMassIndex.php';
-// require_once 'class/RelativeFatMass.php';
 require_once 'connection.php';
 require_once 'helper/get_input.php';
+require_once 'helper/database.php';
 
 // create connection to db
 
@@ -23,14 +20,12 @@ $waistSize = input_checker('waistSize', 1);
 if ($name !== '') {
     // check if get exist
     $data = [$name, $age, $gender, $height, $weight, $waistSize];
-    $preparedQuery = $connection->prepare("INSERT INTO persons (name, age, gender, height, weight, waist_size) VALUES (?, ?, ?, ?, ?, ?)");
-
-    $preparedQuery->execute($data);
+    $insertPersons = $connection->prepare($insertPersonsQuery);
+    $insertPersons->execute($data);
 
     // redirect to index.php
     header('Location: index.php');
 }
-
 
 
 

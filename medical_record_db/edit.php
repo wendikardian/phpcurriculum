@@ -1,7 +1,9 @@
 <?php
 
 require_once 'helper/get_input.php';
-require 'connection.php';
+require_once 'helper/database.php';
+require_once 'connection.php';
+// require_once 'helper/database.php';
 
 
 
@@ -9,9 +11,11 @@ require 'connection.php';
 // get id from url params
 $id = input_checker('id', 0);
 // get data from database
-$selectQuery = "SELECT * FROM persons WHERE id = $id";
-$query = $connection->query($selectQuery);
-$user = $query->fetch();
+
+$query = $connection->prepare($selectSpecified);
+$query->execute([$id]);
+$user = $query->fetch(PDO::FETCH_ASSOC);
+
 
 if (isset($_GET['name'])) {
     $updated_name = input_checker('name', '');
@@ -31,7 +35,7 @@ if (isset($_GET['name'])) {
         $id
     ];
     // print_r($data);
-    $updateQuery = 'UPDATE persons SET name = ?, age = ?, gender = ?, height = ?, weight = ?, waist_size = ? WHERE id = ?;';
+
     $preparedQuery = $connection->prepare($updateQuery);
 
     try {
