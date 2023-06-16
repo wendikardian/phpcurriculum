@@ -6,6 +6,13 @@ require_once('class/RelativeFatMass.php');
 require_once('class/Person.php');
 require_once('connection.php');
 require_once('helper/database.php');
+require_once('helper/Pagination.php');
+
+function get_input($input_name, $default_value)
+{
+    $input_value = $_GET[$input_name] ?? $default_value;
+    return $input_value;
+}
 
 $connection = $mysqlConnection->getConnection();
 
@@ -14,7 +21,19 @@ $users = $query->fetchAll();
 
 // print_r($users);
 
+$totalRecord = count($users);
+$recordsPerPage = 2;
+$currentPage = (int) get_input('page', 1);
+
+$pagination = new Pagination($totalRecord, $recordsPerPage, $currentPage);
+$offset = $pagination->getOffset();
+
+$select = "SELECT * FROM persons LIMIT {$offset}, {$recordsPerPage};";
+$query = $connection->query($select);
+$users = $query->fetchAll();
+
 $id = 1;
+
 
 
 ?>
@@ -82,7 +101,11 @@ $id = 1;
         <?php endforeach; ?>
 
     </table>
-
+    <?php
+    foreach ($pagination->getPages() as $page) :
+    ?>
+        <a href="?page=<?= $page ?>"><?= $page ?></a>
+    <?php endforeach; ?>
 </body>
 
 </html>
