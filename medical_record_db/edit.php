@@ -3,13 +3,14 @@
 require_once 'helper/get_input.php';
 require_once 'helper/database.php';
 require_once 'connection.php';
-// require_once 'helper/database.php';
-
-
-
+require_once 'helper/Validation.php';
+require_once 'helper/RequiredRule.php';
+require_once 'helper/NumberRule.php';
+require_once 'helper/RangeAge.php';
+require_once 'helper/HeightRule.php';
 
 // get id from url params
-$id = input_checker('id', 0);
+$id = $_GET['id'];
 // get data from database
 
 $query = $connection->prepare($selectSpecified);
@@ -17,37 +18,70 @@ $query->execute([$id]);
 $user = $query->fetch(PDO::FETCH_ASSOC);
 
 
-if (isset($_GET['name'])) {
-    $updated_name = input_checker('name', '');
-    $updated_age = input_checker('age', 0);
-    $updated_gender = input_checker('gender', 'm');
-    $updated_height = input_checker('height', 1);
-    $updated_weight = input_checker('weight', 1);
-    $updated_waistSize = input_checker('waistSize', 1);
+$updated_name = input_checker('name', '');
+$updated_age = input_checker('age', 0);
+$updated_gender = input_checker('gender', 'm');
+$updated_height = input_checker('height', 1);
+$updated_weight = input_checker('weight', 1);
+$updated_waistSize = input_checker('waistSize', 1);
 
-    $data = [
-        $updated_name,
-        $updated_age,
-        $updated_gender,
-        $updated_height,
-        $updated_weight,
-        $updated_waistSize,
-        $id
+
+$validation = new Validation();
+
+
+if (isset($_POST['save'])) {
+
+    $attributes = [
+        'name' => $updated_name,
+        'age' => $updated_age,
+        'height' => $updated_height
     ];
-    // print_r($data);
 
-    $preparedQuery = $connection->prepare($updateQuery);
+    $rules = [
+        'name' => [
+            new RequiredRule()
+        ], 'age' => [
+            new RequiredRule(),
+            new NumberRule(),
+            new RangeNumber()
+        ], 'height' => [
+            new RequiredRule(),
+            new HeightRule()
+        ]
+    ];
 
-    try {
-        $preparedQuery->execute($data);
-        echo "<script>alert('Data updated successfully');</script>";
-    } catch (PDOException $e) {
-        echo "<script>alert('Error updating data: " . $e->getMessage() . "');</script>";
+
+    $validation->makeRule(
+        $attributes,
+        $rules
+    );
+    if (count($validation->getErrors()) == 0) {
+
+
+        $data = [
+            $updated_name,
+            $updated_age,
+            $updated_gender,
+            $updated_height,
+            $updated_weight,
+            $updated_waistSize,
+            $id
+        ];
+        // print_r($data);
+
+        $preparedQuery = $connection->prepare($updateQuery);
+
+        try {
+            $preparedQuery->execute($data);
+            echo "<script>alert('Data updated successfully');</script>";
+        } catch (PDOException $e) {
+            echo "<script>alert('Error updating data: " . $e->getMessage() . "');</script>";
+        }
+
+
+        // redirect to index.php
+        header('Location: index.php');
     }
-
-
-    // redirect to index.php
-    header('Location: index.php');
 }
 
 ?>
@@ -66,13 +100,13 @@ if (isset($_GET['name'])) {
 <body>
     <h1>Edit <?= $user['name'] ?>'s Data</h1>
 
-    <form action="" method="get">
+    <form action="" method="POST">
         <input type="hidden" name="id" value="<?= $user['id'] ?>">
         <label for="name">Name:</label>
-        <input type="text" id="name" name="name" value="<?= $user['name'] ?>" required><br>
+        <input type="text" id="name" name="name" value="<?= $user['name'] ?>"><br>
 
         <label for="age">Age:</label>
-        <input type="number" id="age" name="age" required value="<?= $user['age'] ?>"><br>
+        <input type="text" id="age" name="age" required value="<?= $user['age'] ?>"><br>
 
         <label for="gender">Select Gender:</label>
         <select id="gender" name="gender" required>
@@ -91,6 +125,19 @@ if (isset($_GET['name'])) {
 
         <input type="submit" value="Save" name="save">
     </form>
+
+
+    <div style="color:red;"> <?= $validation->getErrors()['name'][0] ?? '' ?> </div>
+    <?php
+    foreach ($validation->getErrors()['age'] ?? [] as $error) {
+        echo "<div style='color:red;'> $error </div>";
+    }
+    ?>
+    <?php
+    foreach ($validation->getErrors()['height'] ?? [] as $error) {
+        echo "<div style='color:red;'> $error </div>";
+    }
+    ?>
 </body>
 
 </html>

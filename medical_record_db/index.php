@@ -60,10 +60,6 @@ $id = 1;
                 <td><?= $user['weight'] ?></td>
                 <td><?= $user['waist_size'] ?></td>
                 <?php
-                // $bmi_score = number_format(calculate_BMI($user['weight'],  $user['height']), 2);
-                // $bmi_category = determineCategory($bmi_score);
-                // $rfm_score = number_format(calculate_rfm($user['height'], $user['waist_size'], $user['gender']), 2);
-                // $rfm_category = determineCategoryRFM($rfm_score, $user['gender']);
 
                 $person = new Person($user['name'], $user['age'], $user['gender']);
                 $bmi = new BodyMassIndex();
@@ -82,7 +78,7 @@ $id = 1;
                     <a href="confirm.php?id=<?= $user['id'] ?>">Delete</a>
                 </td>
             </tr>
-        <?php $id++; ?>
+            <?php $id++; ?>
         <?php endforeach; ?>
 
     </table>

@@ -1,7 +1,7 @@
 <?php
 require_once 'helper/get_input.php';
 
-$id = input_checker('id', 0);
+$id = $_GET['id'];
 
 
 ?>
