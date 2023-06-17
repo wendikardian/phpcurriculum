@@ -18,16 +18,16 @@ $mysqlConnection = new MySQLConnection(
 
 
 $connection = $mysqlConnection->getConnection();
-// print $connection;
+// print_r( $connection);
 
-$query = $connection->query("SELECT * FROM products;");
-$products = $query->fetchAll();
+// $query = $connection->query("SELECT * FROM products;");
+// $products = $query->fetchAll();
 
-print_r($products);
+// print_r($products);
 
 
 // $preparedQuery = $connection->prepare("INSERT INTO products (name, unit, stock, price) VALUES (?, ?, ?, ?);");
-// $preparedQuery->execute(['Wendi', 'Kg', 7, '2000']);
+// $preparedQuery->execute(['Chicken ', '-', 100, 99]);
 
 // $query = $connection->query("SELECT * FROM products;");
 // $products = $query->fetchAll();

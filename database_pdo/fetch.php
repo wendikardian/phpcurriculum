@@ -27,13 +27,13 @@ $connection = $mysqlConnection->getConnection();
 
 // print_r($product);
 
-$userInput = 2;
-$selectQuery = "SELECT * FROM products WHERE id = ?";
-$preparedQuery = $connection->prepare($selectQuery);
-$preparedQuery->execute([$userInput]);
-$result = $preparedQuery->fetch(PDO::FETCH_ASSOC);
+// $userInput = 2;
+// $selectQuery = "SELECT * FROM products WHERE id = ?";
+// $preparedQuery = $connection->prepare($selectQuery);
+// $preparedQuery->execute([$userInput]);
+// $result = $preparedQuery->fetch(PDO::FETCH_ASSOC);
 
-print_r($result);
+// print_r($result);
 
 // For insert data
 
@@ -51,10 +51,10 @@ print_r($result);
 // $preparedQuery->execute($data);
 
 
-// $dataInput = [200, 111, 7];
-// $updateQuery = 'UPDATE products SET stock = ?, price = ? WHERE id = ?;';
-// $preparedQuery = $connection->prepare($updateQuery);
-// $query = $preparedQuery->execute($dataInput);
+$dataInput = [200, 111, 7];
+$updateQuery = 'UPDATE products SET stock = ?, price = ? WHERE id = ?;';
+$preparedQuery = $connection->prepare($updateQuery);
+$query = $preparedQuery->execute($dataInput);
 
 // $preparedQuery = $connection->prepare("INSERT INTO products (name, unit, stock, price) VALUES (?, ?, ?, ?);");
 // $preparedQuery->execute(['Wendi', 'Kg', 7, '2000']);

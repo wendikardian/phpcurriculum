@@ -69,7 +69,9 @@ $id = 1;
             <th>RFM Category</th>
             <th>Action</th>
         </tr>
-        <?php foreach ($users as $user) : ?>
+        <?php foreach ($users as $user) :
+
+            ?>
             <tr>
                 <td> <?= $id ?> </td>
                 <td><?= $user['name'] ?></td>
@@ -85,7 +87,6 @@ $id = 1;
                 $rfm = new RelativeFatMass();
                 $bmi->calculate($user['height'], $user['weight']);
                 $rfm->calculate($user['height'], $user['waist_size'], $user['gender']);
-
 
                 ?>
                 <td><?= $bmi->getScore(); ?></td>
